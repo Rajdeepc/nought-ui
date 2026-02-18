@@ -1,0 +1,65 @@
+:root {
+  --n-font: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --n-mono: ui-monospace, 'SF Mono', 'Cascadia Code', 'Fira Code', monospace;
+  --n-radius: 0.5rem;
+  --n-radius-sm: 0.25rem;
+  --n-radius-lg: 0.75rem;
+  --n-radius-full: 9999px;
+  --n-transition: 150ms ease;
+
+  --n-bg: #ffffff;
+  --n-bg-alt: #f8f9fa;
+  --n-bg-hover: #f1f3f5;
+  --n-surface: #ffffff;
+  --n-border: #dee2e6;
+  --n-border-light: #e9ecef;
+  --n-text: #212529;
+  --n-text-secondary: #6c757d;
+  --n-text-muted: #adb5bd;
+  --n-primary: #4f46e5;
+  --n-primary-hover: #4338ca;
+  --n-primary-text: #ffffff;
+  --n-primary-light: #eef2ff;
+  --n-success: #16a34a;
+  --n-success-light: #f0fdf4;
+  --n-warning: #d97706;
+  --n-warning-light: #fffbeb;
+  --n-danger: #dc2626;
+  --n-danger-light: #fef2f2;
+  --n-info: #0891b2;
+  --n-info-light: #ecfeff;
+  --n-shadow-sm: 0 1px 2px rgba(0,0,0,.05);
+  --n-shadow: 0 1px 3px rgba(0,0,0,.1), 0 1px 2px rgba(0,0,0,.06);
+  --n-shadow-md: 0 4px 6px rgba(0,0,0,.07), 0 2px 4px rgba(0,0,0,.06);
+  --n-shadow-lg: 0 10px 15px rgba(0,0,0,.1), 0 4px 6px rgba(0,0,0,.05);
+  --n-ring: 0 0 0 3px rgba(79,70,229,.3);
+}
+
+[data-theme="dark"] {
+  --n-bg: #0f1117;
+  --n-bg-alt: #181a20;
+  --n-bg-hover: #1e2028;
+  --n-surface: #1a1c23;
+  --n-border: #2e3039;
+  --n-border-light: #252730;
+  --n-text: #e8eaed;
+  --n-text-secondary: #9ca3af;
+  --n-text-muted: #6b7280;
+  --n-primary: #818cf8;
+  --n-primary-hover: #a5b4fc;
+  --n-primary-text: #0f1117;
+  --n-primary-light: rgba(129,140,248,.12);
+  --n-success: #4ade80;
+  --n-success-light: rgba(74,222,128,.1);
+  --n-warning: #fbbf24;
+  --n-warning-light: rgba(251,191,36,.1);
+  --n-danger: #f87171;
+  --n-danger-light: rgba(248,113,113,.1);
+  --n-info: #22d3ee;
+  --n-info-light: rgba(34,211,238,.1);
+  --n-shadow-sm: 0 1px 2px rgba(0,0,0,.3);
+  --n-shadow: 0 1px 3px rgba(0,0,0,.4);
+  --n-shadow-md: 0 4px 6px rgba(0,0,0,.4);
+  --n-shadow-lg: 0 10px 15px rgba(0,0,0,.5);
+  --n-ring: 0 0 0 3px rgba(129,140,248,.3);
+}

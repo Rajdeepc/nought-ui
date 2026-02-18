@@ -1,0 +1,33 @@
+{
+  "name": "nought-ui",
+  "version": "version-0.0.0",
+  "license": "MIT",
+  "author": "Rajdeep Chandra",
+  "homepage": "https://nought-ui.dev",
+  "description": "Ultra-lightweight, zero dependency, semantic HTML/CSS/JS UI library. ~8KB min+gz.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nought-ui/nought.git"
+  },
+  "keywords": [
+    "ui",
+    "components",
+    "component-library",
+    "css-framework",
+    "lightweight",
+    "no-dependencies"
+  ],
+  "files": [
+    "nought.min.css",
+    "nought.min.js",
+    "css",
+    "js"
+  ],
+  "main": "nought.min.js",
+  "style": "nought.min.css",
+  "unpkg": "nought.min.js",
+  "jsdelivr": "nought.min.js",
+  "devDependencies": {
+    "esbuild": "^0.27.3"
+  }
+}

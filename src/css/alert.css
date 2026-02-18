@@ -1,0 +1,9 @@
+.n-alert {
+  display: flex; gap: 0.75rem; padding: 1rem 1.25rem; border-radius: var(--n-radius);
+  border-left: 4px solid var(--n-primary); background: var(--n-primary-light);
+  color: var(--n-text); font-size: 0.9375rem;
+}
+.n-alert-success { border-color: var(--n-success); background: var(--n-success-light) }
+.n-alert-warning { border-color: var(--n-warning); background: var(--n-warning-light) }
+.n-alert-danger { border-color: var(--n-danger); background: var(--n-danger-light) }
+.n-alert-info { border-color: var(--n-info); background: var(--n-info-light) }

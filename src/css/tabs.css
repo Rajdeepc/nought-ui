@@ -1,0 +1,10 @@
+.n-tabs { display: flex; border-bottom: 2px solid var(--n-border-light); gap: 0 }
+.n-tab {
+  padding: 0.625rem 1rem; font: inherit; font-size: 0.9375rem; font-weight: 500;
+  background: none; border: none; border-bottom: 2px solid transparent; margin-bottom: -2px;
+  cursor: pointer; color: var(--n-text-secondary); transition: all var(--n-transition);
+}
+.n-tab:hover { color: var(--n-text) }
+.n-tab.active { color: var(--n-primary); border-bottom-color: var(--n-primary) }
+.n-tab-panel { display: none; padding: 1.25rem 0 }
+.n-tab-panel.active { display: block }

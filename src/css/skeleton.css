@@ -1,0 +1,8 @@
+.n-skeleton {
+  background: linear-gradient(90deg, var(--n-bg-hover) 25%, var(--n-bg-alt) 50%, var(--n-bg-hover) 75%);
+  background-size: 200% 100%; animation: n-shimmer 1.5s infinite; border-radius: var(--n-radius-sm);
+  height: 1rem; width: 100%;
+}
+.n-skeleton-circle { border-radius: 50%; width: 2.5rem; height: 2.5rem }
+.n-skeleton-heading { height: 1.75rem; width: 60% }
+@keyframes n-shimmer { 0% { background-position: 200% 0 } 100% { background-position: -200% 0 } }

@@ -1,0 +1,16 @@
+.n-dropdown { position: relative; display: inline-block }
+.n-dropdown-menu {
+  position: absolute; top: calc(100% + 0.25rem); left: 0; min-width: 12rem; z-index: 50;
+  background: var(--n-surface); border: 1px solid var(--n-border-light); border-radius: var(--n-radius);
+  box-shadow: var(--n-shadow-lg); padding: 0.375rem; opacity: 0; visibility: hidden;
+  transform: translateY(-0.25rem); transition: all var(--n-transition);
+}
+.n-dropdown-menu.open { opacity: 1; visibility: visible; transform: translateY(0) }
+.n-dropdown-item {
+  display: flex; align-items: center; gap: 0.5rem; width: 100%; padding: 0.5rem 0.75rem;
+  font: inherit; font-size: 0.9375rem; background: none; border: none; cursor: pointer;
+  color: var(--n-text); border-radius: var(--n-radius-sm); transition: background var(--n-transition);
+  text-decoration: none; text-align: left;
+}
+.n-dropdown-item:hover { background: var(--n-bg-hover) }
+.n-dropdown-divider { height: 1px; background: var(--n-border-light); margin: 0.375rem 0 }

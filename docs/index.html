@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nought — The ~8KB UI Library</title>
+  <link rel="stylesheet" href="static/nought.min.css">
+  <style>
+    .hero { padding: 6rem 0 4rem; text-align: center }
+    .hero h1 { font-size: 3.5rem; letter-spacing: -0.035em; margin-bottom: 0.25em }
+    .hero h1 span { background: linear-gradient(135deg, var(--n-primary), #8b5cf6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text }
+    .hero .n-lead { max-width: 40rem; margin: 0 auto 2rem }
+    .stat-grid { display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap; margin-top: 2.5rem }
+    .stat { text-align: center }
+    .stat-value { font-size: 2rem; font-weight: 800; color: var(--n-primary) }
+    .stat-label { font-size: 0.875rem; color: var(--n-text-muted) }
+    section { padding: 3rem 0 }
+    .section-title { font-size: 1.75rem; margin-bottom: 0.25rem }
+    .section-desc { color: var(--n-text-secondary); margin-bottom: 2rem }
+    .demo-block { background: var(--n-bg-alt); border: 1px solid var(--n-border-light); border-radius: var(--n-radius-lg); padding: 2rem; margin-bottom: 1.5rem }
+    .code-label { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--n-text-muted); margin-bottom: 0.5rem }
+    footer { padding: 3rem 0; text-align: center; border-top: 1px solid var(--n-border-light); margin-top: 3rem }
+    .toc { position: sticky; top: 5rem; font-size: 0.875rem }
+    .toc a { display: block; padding: 0.25rem 0.75rem; color: var(--n-text-muted); border-left: 2px solid var(--n-border-light); text-decoration: none; transition: all 150ms }
+    .toc a:hover, .toc a.active { color: var(--n-primary); border-color: var(--n-primary) }
+    @media (min-width: 1024px) {
+      .docs-layout { display: grid; grid-template-columns: 1fr 14rem; gap: 4rem }
+    }
+    @media (max-width: 1023px) {
+      .toc-sidebar { display: none }
+    }
+    .hero h1 { font-size: clamp(2.25rem, 5vw, 3.5rem) }
+    .file-size { display: inline-flex; align-items: center; gap: 0.375rem; padding: 0.5rem 1rem; background: var(--n-bg-alt); border: 1px solid var(--n-border-light); border-radius: var(--n-radius-full); font-family: var(--n-mono); font-size: 0.875rem; font-weight: 600 }
+  </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="n-navbar" role="navigation" aria-label="Main navigation">
+  <a href="#" class="n-navbar-brand">Nought</a>
+  <ul class="n-navbar-links">
+    <li><a href="#components">Components</a></li>
+    <li><a href="#get-started">Get Started</a></li>
+    <li>
+      <button class="n-btn n-btn-ghost n-btn-icon n-btn-sm" data-toggle="theme" aria-label="Toggle dark mode" aria-pressed="false" title="Toggle theme">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      </button>
+    </li>
+  </ul>
+</nav>
+
+<!-- Hero -->
+<header class="hero">
+  <div class="n-container">
+    <div class="n-flex n-flex-center n-mb-2" style="gap: 0.75rem">
+      <span class="file-size">nought.css <span class="n-badge n-badge-solid">~6KB</span></span>
+      <span class="file-size">nought.js <span class="n-badge n-badge-solid">~2.2KB</span></span>
+    </div>
+    <h1>Build UIs with<br><span>Nought</span></h1>
+    <p class="n-lead">A complete UI library in ~8KB. No React. No Vue. No build step. No node_modules. Just 2 tiny files and semantic HTML.</p>
+    <div class="n-flex n-flex-center">
+      <a href="#get-started" class="n-btn n-btn-lg">Get Started</a>
+      <a href="#components" class="n-btn n-btn-outline n-btn-lg">Browse Components</a>
+    </div>
+    <div class="stat-grid">
+      <div class="stat"><div class="stat-value">~8KB</div><div class="stat-label">Total Size (gzipped)</div></div>
+      <div class="stat"><div class="stat-value">25+</div><div class="stat-label">Components</div></div>
+      <div class="stat"><div class="stat-value">0</div><div class="stat-label">Dependencies</div></div>
+      <div class="stat"><div class="stat-value">2</div><div class="stat-label">Files</div></div>
+    </div>
+  </div>
+</header>
+
+<main class="n-container">
+<div class="docs-layout">
+<div>
+
+<!-- Get Started -->
+<section id="get-started">
+  <h2 class="section-title">Get Started</h2>
+  <p class="section-desc">Drop two files into your project. That's it. No npm, no webpack, no config.</p>
+
+  <div class="demo-block">
+    <div class="code-label">HTML</div>
+    <pre class="n-pre"><code>&lt;link rel="stylesheet" href="nought.css"&gt;
+&lt;script src="nought.js"&gt;&lt;/script&gt;</code></pre>
+  </div>
+
+  <div class="demo-block">
+    <div class="code-label">Or use a CDN (coming soon)</div>
+    <pre class="n-pre"><code>&lt;link rel="stylesheet" href="https://unpkg.com/nought-ui/nought.css"&gt;
+&lt;script src="https://unpkg.com/nought-ui/nought.js"&gt;&lt;/script&gt;</code></pre>
+  </div>
+
+  <div class="n-alert n-alert-info n-mt-2">
+    <span>Nought auto-initializes on <code class="n-code">DOMContentLoaded</code>. All interactive components work via <code class="n-code">data-*</code> attributes — zero JavaScript required from you.</span>
+  </div>
+</section>
+
+<hr class="n-divider" id="components">
+
+<!-- Buttons -->
+<section id="buttons">
+  <h2 class="section-title">Buttons</h2>
+  <p class="section-desc">Semantic button variants with hover states, focus rings, and keyboard support.</p>
+  <div class="demo-block">
+    <div class="n-flex" style="flex-wrap: wrap">
+      <button class="n-btn">Primary</button>
+      <button class="n-btn n-btn-secondary">Secondary</button>
+      <button class="n-btn n-btn-outline">Outline</button>
+      <button class="n-btn n-btn-ghost">Ghost</button>
+      <button class="n-btn n-btn-danger">Danger</button>
+      <button class="n-btn n-btn-success">Success</button>
+      <button class="n-btn" disabled>Disabled</button>
+    </div>
+    <div class="n-flex n-mt-2">
+      <button class="n-btn n-btn-sm">Small</button>
+      <button class="n-btn">Default</button>
+      <button class="n-btn n-btn-lg">Large</button>
+    </div>
+    <div class="n-mt-2">
+      <button class="n-btn n-btn-block">Full Width Button</button>
+    </div>
+  </div>
+  <pre class="n-pre"><code>&lt;button class="n-btn"&gt;Primary&lt;/button&gt;
+&lt;button class="n-btn n-btn-secondary"&gt;Secondary&lt;/button&gt;
+&lt;button class="n-btn n-btn-outline"&gt;Outline&lt;/button&gt;
+&lt;button class="n-btn n-btn-ghost"&gt;Ghost&lt;/button&gt;
+&lt;button class="n-btn n-btn-danger"&gt;Danger&lt;/button&gt;
+&lt;button class="n-btn n-btn-success"&gt;Success&lt;/button&gt;
+&lt;button class="n-btn n-btn-sm"&gt;Small&lt;/button&gt;
+&lt;button class="n-btn n-btn-lg"&gt;Large&lt;/button&gt;</code></pre>
+</section>
+
+<!-- Cards -->
+<section id="cards">
+  <h2 class="section-title">Cards</h2>
+  <p class="section-desc">Versatile content containers with optional hover effects.</p>
+  <div class="demo-block">
+    <div class="n-grid n-cols-3">
+      <div class="n-card n-card-hover">
+        <div class="n-card-header">Simple Card</div>
+        <div class="n-card-body">
+          <p class="n-mb-0">Clean and minimal card component with hover effect.</p>
+        </div>
+      </div>
+      <div class="n-card n-card-hover">
+        <div class="n-card-body">
+          <span class="n-badge n-badge-success n-mb-1">New</span>
+          <h4 class="n-mt-1">Feature Card</h4>
+          <p class="n-mb-0 n-text-sm">With badge, title and description layout.</p>
+        </div>
+      </div>
+      <div class="n-card n-card-hover">
+        <div class="n-card-body">
+          <p class="n-mb-0">Card body content.</p>
+        </div>
+        <div class="n-card-footer">
+          <div class="n-flex n-flex-between">
+            <span class="n-text-sm n-text-muted">Footer</span>
+            <button class="n-btn n-btn-sm">Action</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <pre class="n-pre"><code>&lt;div class="n-card n-card-hover"&gt;
+  &lt;div class="n-card-header"&gt;Title&lt;/div&gt;
+  &lt;div class="n-card-body"&gt;Content&lt;/div&gt;
+  &lt;div class="n-card-footer"&gt;Footer&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+</section>
+
+<!-- Badges -->
+<section id="badges">
+  <h2 class="section-title">Badges &amp; Tags</h2>
+  <p class="section-desc">Small status indicators and categorization labels.</p>
+  <div class="demo-block">
+    <div class="n-flex">
+      <span class="n-badge">Default</span>
+      <span class="n-badge n-badge-success">Success</span>
+      <span class="n-badge n-badge-warning">Warning</span>
+      <span class="n-badge n-badge-danger">Danger</span>
+      <span class="n-badge n-badge-info">Info</span>
+      <span class="n-badge n-badge-solid">Solid</span>
+    </div>
+    <div class="n-flex n-mt-2">
+      <span class="n-tag">HTML</span>
+      <span class="n-tag">CSS</span>
+      <span class="n-tag">JavaScript</span>
+    </div>
+  </div>
+</section>
+
+<!-- Alerts -->
+<section id="alerts">
+  <h2 class="section-title">Alerts</h2>
+  <p class="section-desc">Contextual feedback messages with semantic border accents.</p>
+  <div class="demo-block">
+    <div class="n-alert n-mb-2">This is a default informational alert.</div>
+    <div class="n-alert n-alert-success n-mb-2">Changes saved successfully!</div>
+    <div class="n-alert n-alert-warning n-mb-2">Your session will expire in 5 minutes.</div>
+    <div class="n-alert n-alert-danger n-mb-0">Failed to delete the resource. Please try again.</div>
+  </div>
+  <pre class="n-pre"><code>&lt;div class="n-alert n-alert-success"&gt;
+  Changes saved successfully!
+&lt;/div&gt;</code></pre>
+</section>
+
+<!-- Forms -->
+<section id="forms">
+  <h2 class="section-title">Forms</h2>
+  <p class="section-desc">Accessible form controls with validation states and custom switches.</p>
+  <div class="demo-block">
+    <div class="n-grid n-cols-2">
+      <div class="n-field">
+        <label class="n-label" for="name">Full Name</label>
+        <input class="n-input" type="text" id="name" placeholder="John Doe">
+        <p class="n-hint">Enter your legal name</p>
+      </div>
+      <div class="n-field">
+        <label class="n-label" for="email">Email</label>
+        <input class="n-input n-input-error" type="email" id="email" placeholder="john@example.com" value="invalid">
+        <p class="n-error">Please enter a valid email address</p>
+      </div>
+    </div>
+    <div class="n-field">
+      <label class="n-label" for="plan">Plan</label>
+      <select class="n-select" id="plan">
+        <option>Free</option>
+        <option>Pro — $9/mo</option>
+        <option>Enterprise — $49/mo</option>
+      </select>
+    </div>
+    <div class="n-field">
+      <label class="n-label" for="bio">Bio</label>
+      <textarea class="n-textarea" id="bio" placeholder="Tell us about yourself..."></textarea>
+    </div>
+    <div class="n-flex n-gap-lg">
+      <label class="n-checkbox"><input type="checkbox" checked> I agree to the terms</label>
+      <label class="n-radio"><input type="radio" name="r" checked> Option A</label>
+      <label class="n-radio"><input type="radio" name="r"> Option B</label>
+    </div>
+    <div class="n-flex n-mt-2">
+      <label class="n-switch">
+        <input type="checkbox" checked>
+        <span class="n-switch-track"></span>
+        <span>Dark mode</span>
+      </label>
+      <label class="n-switch">
+        <input type="checkbox">
+        <span class="n-switch-track"></span>
+        <span>Notifications</span>
+      </label>
+    </div>
+  </div>
+  <pre class="n-pre"><code>&lt;div class="n-field"&gt;
+  &lt;label class="n-label" for="name"&gt;Name&lt;/label&gt;
+  &lt;input class="n-input" type="text" id="name"&gt;
+  &lt;p class="n-hint"&gt;Helper text&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;label class="n-switch"&gt;
+  &lt;input type="checkbox"&gt;
+  &lt;span class="n-switch-track"&gt;&lt;/span&gt;
+  &lt;span&gt;Label&lt;/span&gt;
+&lt;/label&gt;</code></pre>
+</section>
+
+<!-- Table -->
+<section id="table">
+  <h2 class="section-title">Table</h2>
+  <p class="section-desc">Responsive, hover-enabled data tables.</p>
+  <div class="demo-block n-p-0">
+    <div class="n-table-wrap">
+      <table class="n-table">
+        <thead>
+          <tr><th>Name</th><th>Role</th><th>Status</th><th>Action</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Alice Chen</td><td>Engineer</td><td><span class="n-badge n-badge-success">Active</span></td><td><button class="n-btn n-btn-sm n-btn-ghost">Edit</button></td></tr>
+          <tr><td>Bob Smith</td><td>Designer</td><td><span class="n-badge n-badge-success">Active</span></td><td><button class="n-btn n-btn-sm n-btn-ghost">Edit</button></td></tr>
+          <tr><td>Carol White</td><td>PM</td><td><span class="n-badge n-badge-warning">Away</span></td><td><button class="n-btn n-btn-sm n-btn-ghost">Edit</button></td></tr>
+          <tr><td>David Park</td><td>DevOps</td><td><span class="n-badge n-badge-danger">Offline</span></td><td><button class="n-btn n-btn-sm n-btn-ghost">Edit</button></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- Progress -->
+<section id="progress">
+  <h2 class="section-title">Progress</h2>
+  <p class="section-desc">Slim progress bars with color variants.</p>
+  <div class="demo-block">
+    <div class="n-flex n-flex-col n-gap-lg">
+      <div>
+        <div class="n-flex n-flex-between n-mb-1"><span class="n-text-sm">Uploading...</span><span class="n-text-sm n-text-muted">72%</span></div>
+        <div class="n-progress"><div class="n-progress-bar" style="width: 72%"></div></div>
+      </div>
+      <div>
+        <div class="n-progress n-progress-success"><div class="n-progress-bar" style="width: 100%"></div></div>
+      </div>
+      <div>
+        <div class="n-progress n-progress-danger"><div class="n-progress-bar" style="width: 35%"></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Avatar -->
+<section id="avatars">
+  <h2 class="section-title">Avatars</h2>
+  <p class="section-desc">User representations with initials, images, and groups.</p>
+  <div class="demo-block">
+    <div class="n-flex">
+      <span class="n-avatar n-avatar-sm">S</span>
+      <span class="n-avatar">RC</span>
+      <span class="n-avatar n-avatar-lg">LG</span>
+      <span class="n-avatar"><img src="https://i.pravatar.cc/80?img=1" alt="User"></span>
+      <span class="n-avatar"><img src="https://i.pravatar.cc/80?img=2" alt="User"></span>
+    </div>
+    <div class="n-mt-2">
+      <div class="n-avatar-group">
+        <span class="n-avatar"><img src="https://i.pravatar.cc/80?img=3" alt="User"></span>
+        <span class="n-avatar"><img src="https://i.pravatar.cc/80?img=4" alt="User"></span>
+        <span class="n-avatar"><img src="https://i.pravatar.cc/80?img=5" alt="User"></span>
+        <span class="n-avatar">+3</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Keyboard / Code -->
+<section id="kbd-code">
+  <h2 class="section-title">Kbd &amp; Code</h2>
+  <p class="section-desc">Keyboard shortcut indicators and inline code styling.</p>
+  <div class="demo-block">
+    <p>Press <kbd class="n-kbd">Ctrl</kbd> + <kbd class="n-kbd">S</kbd> to save. Use <code class="n-code">console.log()</code> for debugging.</p>
+    <pre class="n-pre"><code>const greet = (name) => {
+  return `Hello, ${name}!`;
+};
+
+console.log(greet('Nought'));</code></pre>
+  </div>
+</section>
+
+<!-- Tooltip -->
+<section id="tooltips">
+  <h2 class="section-title">Tooltips</h2>
+  <p class="section-desc">CSS-only tooltips using <code class="n-code">aria-label</code> — accessible by default.</p>
+  <div class="demo-block">
+    <div class="n-flex">
+      <span class="n-tooltip" aria-label="I'm a tooltip!"><button class="n-btn n-btn-secondary">Hover me</button></span>
+      <span class="n-tooltip" aria-label="Edit this document"><button class="n-btn n-btn-outline">Edit</button></span>
+      <span class="n-tooltip" aria-label="This action is irreversible"><button class="n-btn n-btn-danger">Delete</button></span>
+    </div>
+  </div>
+  <pre class="n-pre"><code>&lt;span class="n-tooltip" aria-label="Tooltip text"&gt;
+  &lt;button class="n-btn"&gt;Hover me&lt;/button&gt;
+&lt;/span&gt;</code></pre>
+</section>
+
+<!-- Skeleton -->
+<section id="skeleton">
+  <h2 class="section-title">Skeleton</h2>
+  <p class="section-desc">Animated loading placeholders.</p>
+  <div class="demo-block">
+    <div class="n-flex" style="align-items: flex-start; gap: 1rem">
+      <div class="n-skeleton n-skeleton-circle"></div>
+      <div style="flex: 1">
+        <div class="n-skeleton n-skeleton-heading n-mb-1"></div>
+        <div class="n-skeleton n-mb-1" style="width: 90%"></div>
+        <div class="n-skeleton" style="width: 70%"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Breadcrumb -->
+<section id="breadcrumbs">
+  <h2 class="section-title">Breadcrumbs</h2>
+  <p class="section-desc">Navigation trail for hierarchical pages.</p>
+  <div class="demo-block">
+    <nav aria-label="Breadcrumb">
+      <ol class="n-breadcrumb">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Components</a></li>
+        <li aria-current="page">Breadcrumbs</li>
+      </ol>
+    </nav>
+  </div>
+</section>
+
+<!-- Spinner -->
+<section id="spinner">
+  <h2 class="section-title">Spinner</h2>
+  <p class="section-desc">Loading indicators in multiple sizes.</p>
+  <div class="demo-block">
+    <div class="n-flex">
+      <span class="n-spinner" role="status" aria-label="Loading"></span>
+      <span class="n-spinner n-spinner-lg" role="status" aria-label="Loading"></span>
+      <button class="n-btn" disabled><span class="n-spinner" style="width: 1rem; height: 1rem; border-width: 2px"></span> Loading...</button>
+    </div>
+  </div>
+</section>
+
+<!-- List -->
+<section id="list">
+  <h2 class="section-title">List</h2>
+  <p class="section-desc">Structured list items with hover states.</p>
+  <div class="demo-block n-p-0">
+    <ul class="n-list" role="list">
+      <li class="n-list-item">
+        <span class="n-avatar n-avatar-sm">A</span>
+        <div>
+          <div style="font-weight: 600">Alice Chen</div>
+          <div class="n-text-sm n-text-muted">alice@example.com</div>
+        </div>
+        <span class="n-badge n-badge-success" style="margin-left: auto">Active</span>
+      </li>
+      <li class="n-list-item">
+        <span class="n-avatar n-avatar-sm">B</span>
+        <div>
+          <div style="font-weight: 600">Bob Smith</div>
+          <div class="n-text-sm n-text-muted">bob@example.com</div>
+        </div>
+        <span class="n-badge n-badge-warning" style="margin-left: auto">Away</span>
+      </li>
+      <li class="n-list-item">
+        <span class="n-avatar n-avatar-sm">C</span>
+        <div>
+          <div style="font-weight: 600">Carol White</div>
+          <div class="n-text-sm n-text-muted">carol@example.com</div>
+        </div>
+        <span class="n-badge n-badge-danger" style="margin-left: auto">Offline</span>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<hr class="n-divider">
+
+<!-- INTERACTIVE COMPONENTS -->
+
+<!-- Tabs -->
+<section id="tabs">
+  <h2 class="section-title">Tabs</h2>
+  <p class="section-desc">Keyboard-navigable tabbed interface with ARIA roles.</p>
+  <div class="demo-block">
+    <div>
+      <div class="n-tabs" role="tablist" aria-label="Example tabs">
+        <button class="n-tab active" role="tab" aria-selected="true" aria-controls="tab-overview" tabindex="0">Overview</button>
+        <button class="n-tab" role="tab" aria-selected="false" aria-controls="tab-features" tabindex="-1">Features</button>
+        <button class="n-tab" role="tab" aria-selected="false" aria-controls="tab-pricing" tabindex="-1">Pricing</button>
+      </div>
+      <div id="tab-overview" class="n-tab-panel active" role="tabpanel">
+        <p>Nought provides a complete set of production-ready components in under 8KB. Ship faster with semantic HTML.</p>
+      </div>
+      <div id="tab-features" class="n-tab-panel" role="tabpanel">
+        <p>25+ components, dark mode, ARIA-first accessibility, CSS custom properties for theming, and zero dependencies.</p>
+      </div>
+      <div id="tab-pricing" class="n-tab-panel" role="tabpanel">
+        <p>Free. Open source. MIT licensed. Forever.</p>
+      </div>
+    </div>
+  </div>
+  <pre class="n-pre"><code>&lt;div class="n-tabs" role="tablist"&gt;
+  &lt;button class="n-tab active" role="tab"
+    aria-selected="true" aria-controls="panel-id"&gt;
+    Tab Label
+  &lt;/button&gt;
+&lt;/div&gt;
+&lt;div id="panel-id" class="n-tab-panel active" role="tabpanel"&gt;
+  Content
+&lt;/div&gt;</code></pre>
+</section>
+
+<!-- Accordion -->
+<section id="accordion">
+  <h2 class="section-title">Accordion</h2>
+  <p class="section-desc">Collapsible content sections with smooth animations.</p>
+  <div class="demo-block">
+    <div class="n-accordion">
+      <div class="n-accordion-item">
+        <button class="n-accordion-trigger" aria-expanded="true">What is Nought?</button>
+        <div class="n-accordion-content" style="max-height: 200px">
+          <div class="n-accordion-content-inner">A complete UI library in ~8KB. Two files — one CSS, one JS — that give you 25+ production-ready components with dark mode and full accessibility.</div>
+        </div>
+      </div>
+      <div class="n-accordion-item">
+        <button class="n-accordion-trigger" aria-expanded="false">Do I need a build step?</button>
+        <div class="n-accordion-content">
+          <div class="n-accordion-content-inner">No! Nought works with plain HTML files. Drop in the CSS and JS files, write semantic markup, and you're done. No webpack, no npm, no config.</div>
+        </div>
+      </div>
+      <div class="n-accordion-item">
+        <button class="n-accordion-trigger" aria-expanded="false">Is it accessible?</button>
+        <div class="n-accordion-content">
+          <div class="n-accordion-content-inner">Yes. Every component is built ARIA-first with proper roles, keyboard navigation, focus management, and screen reader support baked in.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <pre class="n-pre"><code>&lt;div class="n-accordion"&gt;
+  &lt;div class="n-accordion-item"&gt;
+    &lt;button class="n-accordion-trigger" aria-expanded="false"&gt;
+      Question?
+    &lt;/button&gt;
+    &lt;div class="n-accordion-content"&gt;
+      &lt;div class="n-accordion-content-inner"&gt;
+        Answer.
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+</section>
+
+<!-- Modal -->
+<section id="modal">
+  <h2 class="section-title">Modal</h2>
+  <p class="section-desc">Focus-trapping dialog with backdrop blur and keyboard dismissal.</p>
+  <div class="demo-block">
+    <button class="n-btn" data-modal="demo-modal">Open Modal</button>
+  </div>
+  <pre class="n-pre"><code>&lt;button class="n-btn" data-modal="my-modal"&gt;Open&lt;/button&gt;
+
+&lt;div id="my-modal" class="n-modal-overlay" aria-hidden="true"&gt;
+  &lt;div class="n-modal" role="dialog" aria-labelledby="modal-title"&gt;
+    &lt;div class="n-modal-header"&gt;
+      &lt;h3 id="modal-title"&gt;Title&lt;/h3&gt;
+      &lt;button class="n-modal-close"
+        data-modal-close="my-modal"&gt;&amp;times;&lt;/button&gt;
+    &lt;/div&gt;
+    &lt;div class="n-modal-body"&gt;Content&lt;/div&gt;
+    &lt;div class="n-modal-footer"&gt;
+      &lt;button class="n-btn"
+        data-modal-close="my-modal"&gt;Close&lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+</section>
+
+<!-- Modal Instance -->
+<div id="demo-modal" class="n-modal-overlay" aria-hidden="true" role="dialog">
+  <div class="n-modal" aria-labelledby="demo-modal-title">
+    <div class="n-modal-header">
+      <h3 id="demo-modal-title">Welcome to Nought</h3>
+      <button class="n-modal-close" data-modal-close="demo-modal" aria-label="Close">&times;</button>
+    </div>
+    <div class="n-modal-body">
+      <p>This modal was triggered with a simple <code class="n-code">data-modal</code> attribute. No JavaScript was written by you.</p>
+      <p class="n-mb-0">It supports backdrop click to close, <kbd class="n-kbd">Esc</kbd> key, and focus management — all built in.</p>
+    </div>
+    <div class="n-modal-footer">
+      <button class="n-btn n-btn-secondary" data-modal-close="demo-modal">Cancel</button>
+      <button class="n-btn" data-modal-close="demo-modal">Got it</button>
+    </div>
+  </div>
+</div>
+
+<!-- Dropdown -->
+<section id="dropdown">
+  <h2 class="section-title">Dropdown</h2>
+  <p class="section-desc">Context menus with click-outside dismissal.</p>
+  <div class="demo-block">
+    <div class="n-dropdown">
+      <button class="n-btn n-btn-secondary" data-toggle="dropdown" aria-expanded="false" aria-haspopup="true">
+        Options ▾
+      </button>
+      <div class="n-dropdown-menu" role="menu">
+        <button class="n-dropdown-item" role="menuitem">Edit</button>
+        <button class="n-dropdown-item" role="menuitem">Duplicate</button>
+        <button class="n-dropdown-item" role="menuitem">Archive</button>
+        <div class="n-dropdown-divider"></div>
+        <button class="n-dropdown-item" role="menuitem" style="color: var(--n-danger)">Delete</button>
+      </div>
+    </div>
+  </div>
+  <pre class="n-pre"><code>&lt;div class="n-dropdown"&gt;
+  &lt;button class="n-btn" data-toggle="dropdown"
+    aria-expanded="false"&gt;Options ▾&lt;/button&gt;
+  &lt;div class="n-dropdown-menu" role="menu"&gt;
+    &lt;button class="n-dropdown-item"&gt;Edit&lt;/button&gt;
+    &lt;button class="n-dropdown-item"&gt;Delete&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+</section>
+
+<!-- Toast -->
+<section id="toast">
+  <h2 class="section-title">Toast</h2>
+  <p class="section-desc">Non-blocking notification messages via the JS API.</p>
+  <div class="demo-block">
+    <div class="n-flex">
+      <button class="n-btn n-btn-success" onclick="Nought.toast.show('File saved successfully!', 'success')">Success Toast</button>
+      <button class="n-btn n-btn-danger" onclick="Nought.toast.show('Something went wrong.', 'danger')">Error Toast</button>
+      <button class="n-btn n-btn-secondary" onclick="Nought.toast.show('Your session expires soon.', 'warning')">Warning Toast</button>
+      <button class="n-btn n-btn-outline" onclick="Nought.toast.show('New message received.', 'info')">Info Toast</button>
+    </div>
+  </div>
+  <pre class="n-pre"><code>// JS API
+Nought.toast.show('Saved!', 'success');
+Nought.toast.show('Error!', 'danger');
+Nought.toast.show('Warning!', 'warning', 6000); // custom duration</code></pre>
+</section>
+
+<!-- Drawer -->
+<section id="drawer">
+  <h2 class="section-title">Drawer</h2>
+  <p class="section-desc">Slide-out panel for secondary content or navigation.</p>
+  <div class="demo-block">
+    <button class="n-btn" data-drawer="demo-drawer">Open Drawer</button>
+  </div>
+  <pre class="n-pre"><code>&lt;button data-drawer="my-drawer"&gt;Open&lt;/button&gt;
+
+&lt;div id="my-drawer-overlay" class="n-drawer-overlay"&gt;&lt;/div&gt;
+&lt;aside id="my-drawer" class="n-drawer"&gt;
+  &lt;div class="n-drawer-header"&gt;
+    &lt;h3&gt;Title&lt;/h3&gt;
+    &lt;button data-drawer-close="my-drawer"&gt;&amp;times;&lt;/button&gt;
+  &lt;/div&gt;
+  &lt;div class="n-drawer-body"&gt;Content&lt;/div&gt;
+&lt;/aside&gt;</code></pre>
+</section>
+
+<!-- Drawer Instance -->
+<div id="demo-drawer-overlay" class="n-drawer-overlay"></div>
+<aside id="demo-drawer" class="n-drawer" aria-label="Demo drawer">
+  <div class="n-drawer-header">
+    <h3 style="margin: 0; font-size: 1.125rem">Navigation</h3>
+    <button class="n-modal-close" data-drawer-close="demo-drawer" aria-label="Close">&times;</button>
+  </div>
+  <div class="n-drawer-body">
+    <ul class="n-list">
+      <li class="n-list-item">Dashboard</li>
+      <li class="n-list-item">Projects</li>
+      <li class="n-list-item">Team</li>
+      <li class="n-list-item">Settings</li>
+    </ul>
+  </div>
+</aside>
+
+<!-- Dark Mode -->
+<section id="dark-mode">
+  <h2 class="section-title">Dark Mode</h2>
+  <p class="section-desc">System-aware theming that respects <code class="n-code">prefers-color-scheme</code> with manual override.</p>
+  <div class="demo-block">
+    <div class="n-alert n-alert-info n-mb-2">Click the sun icon in the navbar to toggle dark mode. Nought stores the preference in <code class="n-code">localStorage</code> and auto-detects system theme.</div>
+    <pre class="n-pre n-mb-0"><code>// Auto-initializes. Or manually:
+Nought.darkMode.init();
+
+// Toggle programmatically via data attribute:
+&lt;button data-toggle="theme"&gt;Toggle&lt;/button&gt;
+
+// Or customize theming via CSS custom properties:
+:root {
+  --n-primary: #your-brand-color;
+}</code></pre>
+  </div>
+</section>
+
+<!-- Grid Layout -->
+<section id="layout">
+  <h2 class="section-title">Layout &amp; Grid</h2>
+  <p class="section-desc">Responsive grid system and flex utilities.</p>
+  <div class="demo-block">
+    <div class="n-grid n-cols-4 n-mb-2">
+      <div class="n-p-2 n-rounded" style="background: var(--n-primary-light); text-align: center; font-weight: 600; font-size: 0.875rem">1/4</div>
+      <div class="n-p-2 n-rounded" style="background: var(--n-primary-light); text-align: center; font-weight: 600; font-size: 0.875rem">2/4</div>
+      <div class="n-p-2 n-rounded" style="background: var(--n-primary-light); text-align: center; font-weight: 600; font-size: 0.875rem">3/4</div>
+      <div class="n-p-2 n-rounded" style="background: var(--n-primary-light); text-align: center; font-weight: 600; font-size: 0.875rem">4/4</div>
+    </div>
+    <div class="n-grid n-cols-3 n-mb-2">
+      <div class="n-p-2 n-rounded" style="background: var(--n-success-light); text-align: center; font-weight: 600; font-size: 0.875rem">1/3</div>
+      <div class="n-p-2 n-rounded" style="background: var(--n-success-light); text-align: center; font-weight: 600; font-size: 0.875rem">2/3</div>
+      <div class="n-p-2 n-rounded" style="background: var(--n-success-light); text-align: center; font-weight: 600; font-size: 0.875rem">3/3</div>
+    </div>
+    <div class="n-grid n-cols-2">
+      <div class="n-p-2 n-rounded" style="background: var(--n-warning-light); text-align: center; font-weight: 600; font-size: 0.875rem">1/2</div>
+      <div class="n-p-2 n-rounded" style="background: var(--n-warning-light); text-align: center; font-weight: 600; font-size: 0.875rem">2/2</div>
+    </div>
+  </div>
+  <pre class="n-pre"><code>&lt;div class="n-grid n-cols-3"&gt;
+  &lt;div&gt;Column 1&lt;/div&gt;
+  &lt;div&gt;Column 2&lt;/div&gt;
+  &lt;div&gt;Column 3&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="n-container"&gt;
+  &lt;div class="n-flex n-flex-between"&gt;...&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+</section>
+
+<!-- Utilities -->
+<section id="utilities">
+  <h2 class="section-title">Utilities</h2>
+  <p class="section-desc">Spacing, sizing, and helper classes.</p>
+  <div class="demo-block">
+    <div class="n-table-wrap">
+      <table class="n-table">
+        <thead><tr><th>Class</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td><code class="n-code">n-container</code></td><td>Centered container (max 72rem)</td></tr>
+          <tr><td><code class="n-code">n-mt-{0-4}</code></td><td>Margin top (0 / 0.5rem / 1rem / 1.5rem / 2rem)</td></tr>
+          <tr><td><code class="n-code">n-mb-{0-3}</code></td><td>Margin bottom</td></tr>
+          <tr><td><code class="n-code">n-p-{0-4}</code></td><td>Padding</td></tr>
+          <tr><td><code class="n-code">n-flex</code></td><td>Flexbox row with gap</td></tr>
+          <tr><td><code class="n-code">n-grid n-cols-{2-4}</code></td><td>CSS Grid with columns</td></tr>
+          <tr><td><code class="n-code">n-text-sm / n-text-lg</code></td><td>Font sizes</td></tr>
+          <tr><td><code class="n-code">n-text-muted</code></td><td>Muted text color</td></tr>
+          <tr><td><code class="n-code">n-sr-only</code></td><td>Screen reader only (visually hidden)</td></tr>
+          <tr><td><code class="n-code">n-hidden</code></td><td>Display none</td></tr>
+          <tr><td><code class="n-code">n-rounded / n-rounded-full</code></td><td>Border radius variants</td></tr>
+          <tr><td><code class="n-code">n-w-full</code></td><td>Width 100%</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+</div>
+
+<!-- Table of Contents sidebar -->
+<aside class="toc-sidebar">
+  <nav class="toc" aria-label="Table of contents">
+    <a href="#get-started">Get Started</a>
+    <a href="#buttons">Buttons</a>
+    <a href="#cards">Cards</a>
+    <a href="#badges">Badges & Tags</a>
+    <a href="#alerts">Alerts</a>
+    <a href="#forms">Forms</a>
+    <a href="#table">Table</a>
+    <a href="#progress">Progress</a>
+    <a href="#avatars">Avatars</a>
+    <a href="#kbd-code">Kbd & Code</a>
+    <a href="#tooltips">Tooltips</a>
+    <a href="#skeleton">Skeleton</a>
+    <a href="#breadcrumbs">Breadcrumbs</a>
+    <a href="#spinner">Spinner</a>
+    <a href="#list">List</a>
+    <a href="#tabs">Tabs</a>
+    <a href="#accordion">Accordion</a>
+    <a href="#modal">Modal</a>
+    <a href="#dropdown">Dropdown</a>
+    <a href="#toast">Toast</a>
+    <a href="#drawer">Drawer</a>
+    <a href="#dark-mode">Dark Mode</a>
+    <a href="#layout">Layout & Grid</a>
+    <a href="#utilities">Utilities</a>
+  </nav>
+</aside>
+
+</div>
+</main>
+
+<footer>
+  <div class="n-container">
+    <p class="n-text-muted n-mb-1" style="font-size: 0.875rem">Built with Nought. ~8KB of everything.</p>
+    <p class="n-mb-0"><strong>Nought</strong> — ~8KB of everything you need. <span class="n-text-muted">MIT License</span></p>
+  </div>
+</footer>
+
+<script src="static/nought.min.js"></script>
+</body>
+</html>

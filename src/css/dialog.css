@@ -1,0 +1,19 @@
+.n-modal-overlay {
+  position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.5);
+  display: flex; align-items: center; justify-content: center; padding: 1rem;
+  opacity: 0; visibility: hidden; transition: all 200ms ease;
+  backdrop-filter: blur(4px);
+}
+.n-modal-overlay.open { opacity: 1; visibility: visible }
+.n-modal {
+  background: var(--n-surface); border-radius: var(--n-radius-lg); width: 100%; max-width: 32rem;
+  max-height: 85vh; overflow-y: auto; box-shadow: var(--n-shadow-lg);
+  transform: translateY(1rem) scale(0.97); transition: transform 200ms ease;
+}
+.n-modal-overlay.open .n-modal { transform: translateY(0) scale(1) }
+.n-modal-header { display: flex; align-items: center; justify-content: space-between; padding: 1.25rem 1.5rem; border-bottom: 1px solid var(--n-border-light) }
+.n-modal-header h3 { margin: 0; font-size: 1.125rem }
+.n-modal-body { padding: 1.5rem }
+.n-modal-footer { display: flex; justify-content: flex-end; gap: 0.75rem; padding: 1rem 1.5rem; border-top: 1px solid var(--n-border-light) }
+.n-modal-close { background: none; border: none; cursor: pointer; padding: 0.25rem; color: var(--n-text-muted); font-size: 1.25rem; border-radius: var(--n-radius-sm) }
+.n-modal-close:hover { color: var(--n-text); background: var(--n-bg-hover) }

@@ -1,0 +1,10 @@
+.n-card {
+  background: var(--n-surface); border: 1px solid var(--n-border-light);
+  border-radius: var(--n-radius-lg); overflow: hidden;
+  transition: box-shadow var(--n-transition), border-color var(--n-transition);
+}
+.n-card-hover:hover { box-shadow: var(--n-shadow-md); border-color: var(--n-border) }
+.n-card-body { padding: 1.5rem }
+.n-card-header { padding: 1.5rem 1.5rem 0; font-weight: 700; font-size: 1.125rem }
+.n-card-footer { padding: 1rem 1.5rem; border-top: 1px solid var(--n-border-light) }
+.n-card img:first-child { width: 100%; object-fit: cover }

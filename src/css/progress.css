@@ -1,0 +1,28 @@
+.n-progress { width: 100%; height: 0.5rem; background: var(--n-bg-hover); border-radius: var(--n-radius-full); overflow: hidden }
+.n-progress-bar { height: 100%; background: var(--n-primary); border-radius: var(--n-radius-full); transition: width 300ms ease }
+.n-progress-success .n-progress-bar { background: var(--n-success) }
+.n-progress-danger .n-progress-bar { background: var(--n-danger) }
+
+.n-avatar {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 2.5rem; height: 2.5rem; border-radius: 50%; background: var(--n-primary-light);
+  color: var(--n-primary); font-weight: 700; font-size: 0.9375rem; overflow: hidden; flex-shrink: 0;
+}
+.n-avatar img { width: 100%; height: 100%; object-fit: cover }
+.n-avatar-sm { width: 2rem; height: 2rem; font-size: 0.75rem }
+.n-avatar-lg { width: 3.5rem; height: 3.5rem; font-size: 1.25rem }
+.n-avatar-group { display: flex }
+.n-avatar-group .n-avatar { margin-left: -0.5rem; border: 2px solid var(--n-bg) }
+.n-avatar-group .n-avatar:first-child { margin-left: 0 }
+
+.n-breadcrumb { display: flex; align-items: center; gap: 0.5rem; font-size: 0.875rem; list-style: none; padding: 0; margin: 0 }
+.n-breadcrumb li + li::before { content: '/'; color: var(--n-text-muted); margin-right: 0.5rem }
+.n-breadcrumb li:last-child { color: var(--n-text); font-weight: 500 }
+
+.n-list { list-style: none; padding: 0; margin: 0 }
+.n-list-item {
+  display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--n-border-light); transition: background var(--n-transition);
+}
+.n-list-item:last-child { border-bottom: none }
+.n-list-item:hover { background: var(--n-bg-hover) }

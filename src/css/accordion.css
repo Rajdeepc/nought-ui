@@ -1,0 +1,13 @@
+.n-accordion { border: 1px solid var(--n-border-light); border-radius: var(--n-radius) }
+.n-accordion-item { border-bottom: 1px solid var(--n-border-light) }
+.n-accordion-item:last-child { border-bottom: none }
+.n-accordion-trigger {
+  display: flex; align-items: center; justify-content: space-between; width: 100%;
+  padding: 1rem 1.25rem; font: inherit; font-weight: 600; background: none; border: none;
+  cursor: pointer; color: var(--n-text); text-align: left; transition: background var(--n-transition);
+}
+.n-accordion-trigger:hover { background: var(--n-bg-hover) }
+.n-accordion-trigger::after { content: '+'; font-size: 1.25rem; color: var(--n-text-muted); transition: transform var(--n-transition) }
+.n-accordion-trigger[aria-expanded="true"]::after { content: '\2212' }
+.n-accordion-content { max-height: 0; overflow: hidden; transition: max-height 300ms ease }
+.n-accordion-content-inner { padding: 0 1.25rem 1rem; color: var(--n-text-secondary) }

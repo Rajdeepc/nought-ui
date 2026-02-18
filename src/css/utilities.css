@@ -1,0 +1,7 @@
+.n-sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0 }
+.n-mt-0 { margin-top: 0 } .n-mt-1 { margin-top: 0.5rem } .n-mt-2 { margin-top: 1rem } .n-mt-3 { margin-top: 1.5rem } .n-mt-4 { margin-top: 2rem }
+.n-mb-0 { margin-bottom: 0 } .n-mb-1 { margin-bottom: 0.5rem } .n-mb-2 { margin-bottom: 1rem } .n-mb-3 { margin-bottom: 1.5rem }
+.n-p-0 { padding: 0 } .n-p-1 { padding: 0.5rem } .n-p-2 { padding: 1rem } .n-p-3 { padding: 1.5rem } .n-p-4 { padding: 2rem }
+.n-rounded { border-radius: var(--n-radius) } .n-rounded-lg { border-radius: var(--n-radius-lg) } .n-rounded-full { border-radius: var(--n-radius-full) }
+.n-w-full { width: 100% }
+.n-hidden { display: none }

@@ -1,0 +1,27 @@
+.n-btn {
+  display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1.125rem;
+  font: inherit; font-size: 0.875rem; font-weight: 600; line-height: 1.5;
+  border: 1px solid transparent; border-radius: var(--n-radius); cursor: pointer;
+  transition: all var(--n-transition); text-decoration: none; white-space: nowrap;
+  background: var(--n-primary); color: var(--n-primary-text);
+}
+.n-btn:hover { background: var(--n-primary-hover); text-decoration: none }
+.n-btn:active { transform: scale(0.97) }
+.n-btn:focus-visible { box-shadow: var(--n-ring) }
+.n-btn[disabled] { opacity: 0.5; cursor: not-allowed; pointer-events: none }
+
+.n-btn-secondary { background: var(--n-bg-alt); color: var(--n-text); border-color: var(--n-border) }
+.n-btn-secondary:hover { background: var(--n-bg-hover) }
+.n-btn-outline { background: transparent; color: var(--n-primary); border-color: var(--n-primary) }
+.n-btn-outline:hover { background: var(--n-primary-light) }
+.n-btn-ghost { background: transparent; color: var(--n-text) }
+.n-btn-ghost:hover { background: var(--n-bg-hover) }
+.n-btn-danger { background: var(--n-danger); color: #fff }
+.n-btn-danger:hover { background: #b91c1c }
+.n-btn-success { background: var(--n-success); color: #fff }
+.n-btn-success:hover { background: #15803d }
+
+.n-btn-sm { padding: 0.25rem 0.75rem; font-size: 0.8125rem }
+.n-btn-lg { padding: 0.75rem 1.5rem; font-size: 1rem }
+.n-btn-icon { padding: 0.5rem; aspect-ratio: 1; justify-content: center }
+.n-btn-block { width: 100%; justify-content: center }
