@@ -1,4 +1,4 @@
-.n-toast-container {
+.n-toast-container, n-toast-area {
   position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 200;
   display: flex; flex-direction: column-reverse; gap: 0.75rem;
 }

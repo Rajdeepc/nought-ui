@@ -20,8 +20,8 @@
   "files": [
     "nought.min.css",
     "nought.min.js",
-    "css",
-    "js"
+    "core",
+    "components"
   ],
   "main": "nought.min.js",
   "style": "nought.min.css",
